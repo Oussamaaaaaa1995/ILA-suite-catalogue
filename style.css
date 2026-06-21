@@ -55,11 +55,36 @@ body {
     text-transform: uppercase;
 }
 
+.badges-container {
+    margin: 8px 0;
+    display: block;
+    text-align: center;
+}
+
+.info-badge {
+    display: inline-block;
+    background-color: #fff0f2;
+    color: var(--primary);
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 0 4px;
+}
+
+.info-badge.title-halal {
+    background-color: #e6f7ed;
+    color: #1e7e34;
+    border-color: #a3e2bc;
+}
+
 .tagline {
     color: var(--primary);
     font-size: 0.85rem;
     font-style: italic;
-    margin: 0;
+    margin: 4px 0 0 0;
+    font-weight: 600;
 }
 
 /* Grid 3x3 nishan */
@@ -82,6 +107,80 @@ body {
     justify-content: space-between;
     background: #fff;
     box-shadow: 0 2px 5px rgba(179, 57, 81, 0.03);
+    position: relative; /* Très important pour positionner la checkbox */
+}
+
+/* --- STYLES CASE À COCHER (CHECKBOX) --- */
+.checkbox-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 10;
+}
+
+/* Cache la checkbox par défaut de l'ordinateur */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Crée un carré personnalisé très propre */
+.checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #fff;
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Quand on survole la carte */
+.checkbox-container:hover input ~ .checkmark {
+    background-color: #fff0f2;
+}
+
+/* Quand la case est cochée (Couleur de fond bordeaux) */
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Crée l'indicateur de coche (le V blanc caché par défaut) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Montre l'indicateur quand la case est cochée */
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style de la coche blanche (le petit V) */
+.checkbox-container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .product-category {
@@ -90,6 +189,7 @@ body {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.5px;
+    margin-top: 5px;
 }
 
 .product-name {
