@@ -135,7 +135,6 @@
             <div class="product-card"><label class="checkbox-container"><input type="checkbox"><span class="checkmark"></span></label><div class="product-category">Collection</div><h3 class="product-name">Produit 57</h3><img src="images/57.jpeg" class="product-image"><div class="price-tag">11 € <span class="unit">Le Sachet</span></div></div>
             <div class="product-card"><label class="checkbox-container"><input type="checkbox"><span class="checkmark"></span></label><div class="product-category">Collection</div><h3 class="product-name">Produit 58</h3><img src="images/58.jpeg" class="product-image"><div class="price-tag">11 € <span class="unit">Le Sachet</span></div></div>
             <div class="product-card"><label class="checkbox-container"><input type="checkbox"><span class="checkmark"></span></label><div class="product-category">Collection</div><h3 class="product-name">Produit 61</h3><img src="images/61.jpeg" class="product-image"><div class="price-tag">11 € <span class="unit">Le Sachet</span></div></div>
-            <div class="product-card"><label class="checkbox-container"><input type="checkbox"><span class="checkmark"></span></label><div class="product-category">Collection</div><h3 class="product-name">Produit 80</h3><img src="images/80.jpeg" class="product-image"><div class="price-tag">11 € <span class="unit">Le Sachet</span></div></div>
             <div class="product-card"><label class="checkbox-container"><input type="checkbox"><span class="checkmark"></span></label><div class="product-category">Collection</div><h3 class="product-name">Produit 75</h3><img src="images/75.jpeg" class="product-image"><div class="price-tag">11,50 € <span class="unit">Le Sachet</span></div></div>
         </div>
         <div class="footer-banner">
@@ -250,6 +249,45 @@
             <div class="footer-text">CONTACTEZ-NOUS POUR PASSER COMMANDE !</div>
         </div>
     </div>
+<script>
+function envoyerCommande() {
+    // 1. Récupérer toutes les cartes de produits
+    const cards = document.querySelectorAll('.product-card');
+    let message = "Bonjour Fouad, voici ma commande :\n\n";
+    let auMoinsUnProduit = false;
 
+    // 2. Boucler sur chaque carte pour voir si elle est cochée
+    cards.forEach(card => {
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        // On vérifie que la checkbox existe et qu'elle est cochée
+        if (checkbox && checkbox.checked) {
+            const productName = card.querySelector('.product-name').innerText;
+            const productPrice = card.querySelector('.price-tag').innerText.replace('\n', ' ');
+            
+            message += `✅ ${productName} - ${productPrice}\n`;
+            auMoinsUnProduit = true;
+        }
+    });
+
+    if (!auMoinsUnProduit) {
+        alert("Veuillez cocher au moins un produit avant d'envoyer !");
+        return;
+    }
+
+    message += "\nMerci de me confirmer la disponibilité.";
+
+    // 3. Encoder le message pour l'URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // 4. Ton numéro WhatsApp (format international sans le +)
+    const numeroWhatsApp = "33751049077"; 
+    
+    // 5. Ouvrir WhatsApp
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${encodedMessage}`, '_blank');
+}
+</script>
+<button onclick="envoyerCommande()" class="btn-whatsapp-send">
+    💬 Envoyer ma sélection sur WhatsApp
+</button>
 </body>
 </html>
